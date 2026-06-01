@@ -78,7 +78,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative bg-gradient-to-br from-blue-50 to-teal-50 dark:from-slate-800 dark:to-slate-800 rounded-3xl p-8 lg:p-12 overflow-hidden"
+          className="relative bg-linear-to-br from-blue-50 to-teal-50 dark:from-slate-800 dark:to-slate-800 rounded-3xl p-8 lg:p-12 overflow-hidden"
         >
           <Quote size={64} className="absolute top-6 right-8 text-blue-100 dark:text-slate-700" />
 

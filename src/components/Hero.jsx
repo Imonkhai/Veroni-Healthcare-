@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, MessageCircle, Star, Users, Award, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, Star, Users, Award, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const slides = [
   {
@@ -109,8 +109,8 @@ export default function Hero() {
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/92 via-slate-900/70 to-slate-900/30 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-linear-to-r from-slate-900/92 via-slate-900/70 to-slate-900/30 z-10" />
+        <div className="absolute inset-0 bg-linear-to-t from-slate-900/70 via-transparent to-transparent z-10" />
       </div>
 
       {/* Left arrow */}
@@ -131,22 +131,10 @@ export default function Hero() {
         <ChevronRight size={24} className="group-hover:translate-x-0.5 transition-transform" />
       </button>
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setDir(i > current ? 1 : -1); setCurrent(i) }}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`transition-all duration-500 rounded-full ${
-              i === current ? 'w-8 h-2 bg-teal-400' : 'w-2 h-2 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
-      </div>
+      {/* Slide indicators — moved into content flow above stats */}
 
       {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-24">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8 lg:pt-36 lg:pb-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Left — animated text per slide */}
@@ -169,7 +157,7 @@ export default function Hero() {
                 <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
                   {slide.headline.map((line, i) =>
                     i === slide.highlight ? (
-                      <span key={i} className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-teal-300 block">
+                      <span key={i} className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-teal-300 block">
                         {line}
                       </span>
                     ) : (
@@ -193,24 +181,6 @@ export default function Hero() {
                 </button>
               </motion.div>
             </AnimatePresence>
-
-            {/* CTAs — static, don't re-animate */}
-            <div className="flex flex-wrap gap-4 mb-12">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold px-6 py-3.5 rounded-xl transition-all hover:shadow-xl hover:shadow-blue-500/40 active:scale-95 group"
-              >
-                Get Support
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 glass text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/20 transition-all active:scale-95"
-              >
-                <MessageCircle size={18} />
-                Contact Us
-              </a>
-            </div>
 
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-4 text-blue-200/70 text-sm">
@@ -249,7 +219,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Stats bar */}
+        {/* Slide indicators — below stats cards */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -264,6 +234,20 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+
+        {/* Slide indicators — below stats cards */}
+        <div className="flex justify-center gap-2 mt-8 mb-2">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { setDir(i > current ? 1 : -1); setCurrent(i) }}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`transition-all duration-500 rounded-full ${
+                i === current ? 'w-8 h-2 bg-teal-400' : 'w-2 h-2 bg-white/40 hover:bg-white/70'
+              }`}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Wave divider */}

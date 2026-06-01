@@ -108,7 +108,7 @@ export default function Programs() {
           >
             <div className="relative h-64 lg:h-full min-h-[320px]">
               <img src={current.image} alt={current.headline} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10 dark:to-slate-800/20" />
+              <div className="absolute inset-0 bg-linear-to-r from-transparent to-white/10 dark:to-slate-800/20" />
             </div>
             <div className="p-8 lg:p-10">
               <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white mb-3">{current.headline}</h3>

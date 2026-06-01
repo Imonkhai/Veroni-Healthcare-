@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
   return (
     <section id="why-us" ref={ref} className="py-20 lg:py-28 bg-white dark:bg-slate-950 relative overflow-hidden">
       {/* Background accent */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50/60 to-transparent dark:from-blue-900/10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-blue-50/60 to-transparent dark:from-blue-900/10 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

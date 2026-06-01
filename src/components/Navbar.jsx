@@ -5,14 +5,14 @@ import { Menu, X, Moon, Sun, Phone, ChevronDown, Brain, Puzzle, GraduationCap, U
 import logo from '../assets/ChatGPT Image May 30, 2026, 03_59_53 AM.png'
 
 const services = [
-  { icon: Brain, label: 'Behavioral Consultation', href: '#services' },
-  { icon: Puzzle, label: 'Autism Therapy', href: '#services' },
-  { icon: GraduationCap, label: 'Staff Training', href: '#services' },
-  { icon: Users, label: 'Support Staffing', href: '#services' },
-  { icon: Baby, label: "Children's Programs", href: '#services' },
-  { icon: Home, label: 'Residential Care', href: '#services' },
-  { icon: DayIcon, label: 'Day Programs', href: '#services' },
-  { icon: HeartHandshake, label: 'Family Support', href: '#services' },
+  { icon: Brain, label: 'Behavioral Consultation', href: '/services/behavioral-consultation' },
+  { icon: Puzzle, label: 'Autism Therapy', href: '/services/autism-therapy' },
+  { icon: GraduationCap, label: 'Staff Training', href: '/services/staff-training' },
+  { icon: Users, label: 'Support Staffing', href: '/services/support-staffing' },
+  { icon: Baby, label: "Children's Programs", href: '/services/childrens-programs' },
+  { icon: Home, label: 'Residential Care', href: '/services/residential-care' },
+  { icon: DayIcon, label: 'Day Programs', href: '/services/day-programs' },
+  { icon: HeartHandshake, label: 'Family Support', href: '/services/family-support' },
 ]
 
 const programs = [
@@ -52,12 +52,11 @@ const team = [
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services', dropdown: 'services' },
-  { label: 'Programs', href: '#programs', dropdown: 'programs' },
+  { label: 'About Us', href: '/about-us' },
+  { label: 'Services', href: '/services', dropdown: 'services' },
+  { label: 'Day Programs', href: '/day-programs' },
   { label: 'Team', href: '/team' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Careers', href: '#careers' },
+  { label: 'Contact Us', href: '/contact' },
 ]
 
 export default function Navbar({ dark, setDark }) {
@@ -100,9 +99,9 @@ export default function Navbar({ dark, setDark }) {
 
   const linkClass = (id) => `relative flex items-center px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
     isScrolled
-      ? active === id ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+      ? active === id ? 'text-blue-600 dark:text-blue-400'
         : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-slate-800'
-      : active === id ? 'text-teal-300 bg-white/10'
+      : active === id ? 'text-teal-300'
         : 'text-white/90 hover:text-white hover:bg-white/10'
   }`
 
@@ -121,7 +120,7 @@ export default function Navbar({ dark, setDark }) {
           <motion.div
             initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} exit={{ scaleX: 0 }}
             transition={{ duration: 0.4 }}
-            className="h-0.5 bg-gradient-to-r from-blue-600 via-teal-500 to-blue-400 origin-left"
+            className="h-0.5 bg-linear-to-r from-blue-600 via-teal-500 to-blue-400 origin-left"
           />
         )}
       </AnimatePresence>
@@ -133,7 +132,7 @@ export default function Navbar({ dark, setDark }) {
           <img
             src={logo}
             alt="Veroni Healthcare Services"
-            className={`w-auto object-contain transition-all duration-500 ${isScrolled ? '' : 'brightness-0 invert'}`}
+            className="w-auto object-contain transition-all duration-300"
             style={{ height: isScrolled ? '48px' : '52px' }}
           />
         </motion.a>
@@ -145,44 +144,40 @@ export default function Navbar({ dark, setDark }) {
               {l.dropdown ? (
                 <>
                   <button
+                    onMouseEnter={() => setDropdown(l.dropdown)}
                     onClick={() => setDropdown(d => d === l.dropdown ? null : l.dropdown)}
                     className={linkClass(getLinkId(l.href))}
                   >
                     {l.label}
-                    <motion.span animate={{ rotate: dropdown === l.dropdown ? 180 : 0 }} transition={{ duration: 0.25 }} className="ml-1">
-                      <ChevronDown size={14} />
-                    </motion.span>
                   </button>
 
                   {/* Services dropdown */}
                   <AnimatePresence>
                     {l.dropdown === 'services' && dropdown === 'services' && (
                       <motion.div
-                        initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                        transition={{ duration: 0.22, ease: 'easeOut' }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-blue-900/15 border border-slate-100 dark:border-slate-700 overflow-hidden"
+                        exit={{ opacity: 0, y: 4, scale: 0.97 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
+                        onMouseLeave={() => setDropdown(null)}
+                        className="absolute top-full left-0 mt-1 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-blue-900/15 border border-slate-100 dark:border-slate-700 overflow-hidden"
                       >
-                        <div className="bg-gradient-to-r from-blue-600 to-teal-500 px-5 py-3">
-                          <p className="text-white font-semibold text-sm">Our Services</p>
-                          <p className="text-blue-100/80 text-xs">Comprehensive care for every stage of life</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-1 p-3">
+                        <div className="p-2">
                           {services.map(({ icon: Icon, label, href }) => (
-                            <a key={label} href={href} onClick={() => setDropdown(null)}
+                            <a key={label} href={href}
+                              onClick={() => { navigate(href); setDropdown(null) }}
                               className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 group transition-colors"
                             >
-                              <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center shrink-0 group-hover:bg-blue-200 transition-colors">
-                                <Icon size={14} className="text-blue-600" />
+                              <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center shrink-0 group-hover:bg-blue-200 transition-colors">
+                                <Icon size={13} className="text-blue-600" />
                               </div>
-                              <span className="text-slate-700 dark:text-slate-300 text-xs font-medium group-hover:text-blue-600 transition-colors">{label}</span>
+                              <span className="text-slate-700 dark:text-slate-300 text-sm font-medium group-hover:text-blue-600 transition-colors">{label}</span>
                             </a>
                           ))}
                         </div>
-                        <div className="px-4 pb-4">
-                          <a href="#services" onClick={() => setDropdown(null)}
-                            className="block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded-xl transition-colors"
+                        <div className="px-3 pb-3">
+                          <a href="/services" onClick={() => { navigate('/services'); setDropdown(null) }}
+                            className="block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 rounded-xl transition-colors"
                           >View All Services →</a>
                         </div>
                       </motion.div>
@@ -199,7 +194,7 @@ export default function Navbar({ dark, setDark }) {
                         transition={{ duration: 0.22, ease: 'easeOut' }}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-blue-900/15 border border-slate-100 dark:border-slate-700 overflow-hidden"
                       >
-                        <div className="bg-gradient-to-r from-slate-700 to-blue-700 px-5 py-3">
+                        <div className="bg-linear-to-r from-slate-700 to-blue-700 px-5 py-3">
                           <p className="text-white font-semibold text-sm">Our Leadership Team</p>
                           <p className="text-slate-300/80 text-xs">Meet the experts behind your care</p>
                         </div>
@@ -238,7 +233,7 @@ export default function Navbar({ dark, setDark }) {
                         transition={{ duration: 0.22, ease: 'easeOut' }}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[360px] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-blue-900/15 border border-slate-100 dark:border-slate-700 overflow-hidden"
                       >
-                        <div className="bg-gradient-to-r from-teal-600 to-blue-500 px-5 py-3">
+                        <div className="bg-linear-to-r from-teal-600 to-blue-500 px-5 py-3">
                           <p className="text-white font-semibold text-sm">Programs & Support</p>
                           <p className="text-teal-100/80 text-xs">Designed for every individual</p>
                         </div>
@@ -314,12 +309,12 @@ export default function Navbar({ dark, setDark }) {
           </motion.button>
 
           <motion.a
-            href="#contact"
+            href="/contact"
             whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
-            className="hidden md:inline-flex items-center gap-2 relative overflow-hidden bg-gradient-to-r from-blue-600 to-teal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/25 group"
+            className="hidden md:inline-flex items-center gap-2 relative overflow-hidden bg-linear-to-r from-blue-600 to-teal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-blue-600/25 group"
           >
             <span className="relative z-10">Get Support</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <span className="absolute inset-0 bg-linear-to-r from-teal-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.a>
 
           <motion.button
@@ -444,7 +439,7 @@ export default function Navbar({ dark, setDark }) {
                 <a
                   href="#contact"
                   onClick={() => setOpen(false)}
-                  className="block text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold px-4 py-3 rounded-xl shadow-lg shadow-blue-600/20"
+                  className="block text-center bg-linear-to-r from-blue-600 to-teal-500 text-white font-semibold px-4 py-3 rounded-xl shadow-lg shadow-blue-600/20"
                 >
                   Get Support
                 </a>

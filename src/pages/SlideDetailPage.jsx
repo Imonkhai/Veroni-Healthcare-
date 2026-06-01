@@ -13,8 +13,8 @@ export default function SlideDetailPage({ slide }) {
       <section className="relative py-28 lg:py-36 overflow-hidden">
         <div className="absolute inset-0">
           <img src={slide.image} alt={slide.title} className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-slate-900/95 via-slate-900/80 to-slate-900/50" />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-900/60 via-transparent to-transparent" />
         </div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.span

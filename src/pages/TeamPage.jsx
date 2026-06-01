@@ -82,7 +82,7 @@ export default function TeamPage() {
             alt=""
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/50" />
+          <div className="absolute inset-0 bg-linear-to-r from-slate-900/95 via-slate-900/80 to-slate-900/50" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.span
@@ -96,7 +96,7 @@ export default function TeamPage() {
             className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
           >
             The Experts Behind{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-teal-300">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-300 to-teal-300">
               Your Care
             </span>
           </motion.h1>
